@@ -1,4 +1,4 @@
-node_modules
-.env
-.now
-.env.sample
+node_modules/
+*.env
+*.now
+*.env.sample
