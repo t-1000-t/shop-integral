@@ -1,0 +1,26 @@
+{
+  "name": "sai",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "deploy": "now -e PASSWORDSAI=@passwordsai"
+  },
+  "keywords": [],
+  "author": "yandexzoid",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.4",
+    "dotenv": "^5.0.1",
+    "express": "^4.16.3",
+    "form-data": "^3.0.0",
+    "morgan": "^1.9.1",
+    "node-fetch": "^2.1.2",
+    "nodemon": "^1.17.4"
+  },
+  "optionalDependencies": {
+    "fsevents": "*"
+  }
+}
