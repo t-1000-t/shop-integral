@@ -2,7 +2,8 @@ const express = require("express");
 const cors = require("cors");
 const morgan = require("morgan");
 const fetch = require("node-fetch");
-const FormData = require("form-data");
+
+const interval = require("./interval");
 
 require("dotenv").config();
 
@@ -11,22 +12,51 @@ const app = express();
 app.use(morgan("tiny"));
 app.use(cors());
 
-const formdata = new FormData();
-formdata.append("login", `${process.env.LOGINSAI}`);
-formdata.append("password", `${process.env.PASSWORDSAI}`);
+number = [];
 
-app.get("/sai", (req, res) => {
-  const url = "http://api.brain.com.ua/auth";
+setInterval(() => {
+  if (number.length === 1) {
+    interval();
+  }
+
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * Math.floor(max));
+  }
+
+  number.push(getRandomInt(99));
+  if (number.length > 200) {
+    number = [];
+  }
+}, 3000);
+
+// app.use(function(req, res, next) {
+//   console.log(process.env.SID + "!");
+
+//   next();
+// });
+
+app.get("/categories", (req, res) => {
+  const url = `http://api.brain.com.ua/categories/${process.env.SID}`;
   fetch(`${url}`, {
-    method: "POST",
-    body: formdata
+    method: "GET"
   })
     .then(response => response.json())
-    .then(json => {
-      res.json(json);
-    })
+    .then(json => res.json(json))
     .catch(error => console.log("error", error));
 });
+
+// app.get("/products", (req, res) => {
+//   const url = `http://api.brain.com.ua/products/1181/${process.env.SID}`;
+//   fetch(`${url}`, {
+//     method: "GET"
+//   })
+//     .then(response => response.json())
+//     .then(prod => prod.result)
+//     .then(json => {
+//       res.json(json);
+//     })
+//     .catch(error => console.log("error", error));
+// });
 
 function notFound(req, res, next) {
   res.status(404);

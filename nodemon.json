@@ -1,0 +1,8 @@
+{
+  "ignore": ["node_modules", "client"],
+  "env": {
+    "NODE_ENV": "development"
+  },
+  "ext": ".js,.json",
+  "watch": "index"
+}
